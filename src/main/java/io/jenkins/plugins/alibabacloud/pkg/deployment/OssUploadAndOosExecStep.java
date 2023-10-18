@@ -25,7 +25,9 @@ import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.interceptor.RequirePOST;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
+
 /**
  * This class is a  pipeline step:
  * 1.compress specific directory
@@ -440,7 +442,7 @@ public class OssUploadAndOosExecStep extends Step {
                     logger.println("File already exists, overwriting: " + zipFile.getPath());
                 }
             } else {
-                zipFile = File.createTempFile(projectName + "-", ".zip");
+                zipFile = Files.createTempFile(projectName + "-", ".zip").toFile();
             }
 
             FileOutputStream outputStream = new FileOutputStream(zipFile);
